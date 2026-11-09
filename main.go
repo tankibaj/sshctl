@@ -19,6 +19,9 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
+// version is set at build time via -ldflags by GoReleaser.
+var version = "dev"
+
 const (
 	ColorReset  = "\033[0m"
 	ColorRed    = "\033[31m"
@@ -693,6 +696,8 @@ func main() {
 		}
 	case "-h", "--help", "help":
 		printHelp()
+	case "-v", "--version", "version":
+		fmt.Println("sshctl", version)
 	case "-l", "--list", "list":
 		if err := sm.listAddedKeys(); err != nil {
 			log.Fatal("Error listing keys:", err)
